@@ -12,3 +12,19 @@ class Region(models.Model):
 
     def __str__(self):
         return self.name
+
+
+#distric model
+class District(models.Model):
+    name = models.CharField(max_length=100)
+    code = models.CharField(max_length=50, unique=True)
+    region = models.ForeignKey(Region, on_delete=models.PROTECT)
+
+    is_active = models.BooleanField(default=True)   # UI status field
+    is_deleted = models.BooleanField(default=False) # Soft delete
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
